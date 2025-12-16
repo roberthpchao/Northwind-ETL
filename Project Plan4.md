@@ -93,9 +93,3 @@ If you are certain you have not yet created the `Fact_OrderMetrics` table, this 
 
     -- If you created Dim_Category before, check if that also needs dropping (it shouldn't reference Dim_Product)
     ```
-
------
-
-**Recommendation:** Use **Option A** to update your `etl_product.py` script. This teaches you how to handle constraints in an ETL environment, which is a necessary skill.
-
-Please update your Python file and **run `python etl_product.py` again.** This should now succeed.
