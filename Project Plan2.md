@@ -104,7 +104,3 @@ This is the most complex step as it requires a **lookup** to connect the data.
       * **Calculate:** Compute `ExtendedPrice`.
       * **Lookup:** After loading `Dim_Product`, you must fetch the mapping between `Source_ProductID` (from source) and `ProductKey` (the new surrogate key). This mapping is then used to populate the `ProductKey` column in the `Fact_OrderMetrics` table.
       * **Load:** Insert the final data into `Fact_OrderMetrics`.
-
------
-
-Ready to proceed with **Phase 2: Data Mart Schema Setup** using SSMS and defining the SQL for the `Dim` and `Fact` tables?
