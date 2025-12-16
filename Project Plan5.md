@@ -1,5 +1,3 @@
-You are absolutely correct to question that\! My previous assumption was that the table didn't exist, but since you confirmed that `Fact_OrderMetrics` *did* exist before the first attempt, the error means the issue is more nuanced.
-
 ### 🔍 Re-evaluating the Foreign Key Error
 
 If the error persists *even after* adding the `ALTER TABLE NOCHECK` logic, there are only two logical possibilities:
@@ -90,8 +88,6 @@ referencing_table	constraint_name
 Fact_OrderMetrics	FK__Fact_Orde__Produ__628FA481
 I haven't try step 2 python delete yet.
 
-Thank you for running the diagnostic query. That is extremely helpful\!
-
 The diagnosis confirms two crucial facts:
 
 1.  **Referencing Table:** The table causing the lock is indeed **`Fact_OrderMetrics`**.
@@ -169,16 +165,10 @@ Run the updated script from your terminal:
 (venv_nw) python etl_product.py
 ```
 
-This should now successfully clear the table using `DELETE` and insert the 77 product rows.
-
-If this succeeds, we can move on to the most exciting part: **Phase 5: Loading the Fact Table\!**
-
 ---
 
 ###
 Loading failed: ('42S22', "[42S22] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Invalid column name 'Source_SupplierID'. (207) (SQLExecDirectW); [42S22] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Invalid column name 'QuantityPerUnit'. (207); [42S22] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Invalid column name 'Discontinued'. (207); [42S22] [Microsoft][ODBC Driver 17 for SQL Server][SQL Server]Statement(s) could not be prepared. (8180)")
-
-Thank you for running the script and providing the detailed error output. This is a common issue when working between Python/Pandas column names and the SQL Server's exact expectations.
 
 The error message `Invalid column name 'Source_SupplierID'` (and similar for `QuantityPerUnit` and `Discontinued`) means the issue is *not* with the `DELETE` command this time, but with the **`INSERT` statement**.
 
@@ -269,5 +259,3 @@ Run the script from your terminal again:
 ```bash
 (venv_nw) python etl_product.py
 ```
-
-Let me know if this successfully loads the 77 product rows\! If it does, we move onto the final, exciting Phase 5: Loading the Fact Table.
