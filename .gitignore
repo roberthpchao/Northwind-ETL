@@ -1,0 +1,9 @@
+# Virtual Environment
+venv_nw/
+
+# Python cache
+__pycache__/
+
+# Windows/VS Code files
+.vscode/
+*.pyc
