@@ -1,30 +1,3 @@
-That is fantastic news\! Both of our dimension tables are now successfully loading:
-
-  * **`Dim_Category`**: 8 rows loaded (previously successful).
-  * **`Dim_Product`**: 77 rows loaded (now successful with the schema fix).
-
-### Status Check on `Dim_Category`
-
-The `Dim_Category` table should **still contain the 8 rows** from your earlier run.
-
-Here is why:
-
-1.  When we corrected the foreign key issue in the last step, we only ran `DROP TABLE Fact_OrderMetrics` and `DROP TABLE Dim_Product`.
-2.  We **did not** run a `DROP TABLE Dim_Category`.
-3.  Therefore, the data you loaded into `Dim_Category` earlier is preserved.
-
-**Verification (SSMS):**
-
-To be absolutely sure, you can quickly check in SSMS:
-
-```sql
-SELECT COUNT(*) FROM Dim_Category;
-```
-
-It should return **8**.
-
------
-
 ## ⏭️ Next Step: Phase 5: ETL Pipeline (Order Fact)
 
 Now we move on to the most crucial and technically advanced part of the Data Mart project: **loading the central `Fact_OrderMetrics` table.**
@@ -189,7 +162,6 @@ if __name__ == '__main__':
     SELECT TOP 10 ExtendedPrice, Quantity, Discount FROM Fact_OrderMetrics ORDER BY ExtendedPrice DESC;
     ```
 
-Let me know if the fact table loads correctly\! This completes the core ETL process for your first Data Mart.
 
 ---
 
@@ -282,8 +254,6 @@ Please update the `load_fact_table` function in `etl_orders.py` and run the scri
 ```bash
 (venv_nw) python etl_orders.py
 ```
-
-This should resolve the parameter count mismatch and successfully load the order fact data. Let me know the results\!
 
 ----
 
@@ -449,7 +419,7 @@ Traceback (most recent call last):
     raise KeyError(f"{labels[mask].tolist()} not found in axis")
 KeyError: "['Source_ProductID_y'] not found in axis"
 
-I sincerely apologize for the continued back-and-forth on this fact loading script. These minor column naming issues are the most frustrating but common part of ETL development\!
+---
 
 The current error, `KeyError: "['Source_ProductID_y'] not found in axis"`, tells us that the previous fix, which attempted to drop a column named `'Source_ProductID_y'`, failed because that column name **did not exist** in the DataFrame after the merge.
 
@@ -541,5 +511,3 @@ Please implement these two critical fixes in your `transform_fact_data` function
 ```bash
 (venv_nw) python etl_orders.py
 ```
-
-This addresses the column naming in the exact order the DataFrame sees it and should finally achieve the correct 9-column count for the insertion. Let me know if the fact table load is successful\!
