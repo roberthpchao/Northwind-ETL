@@ -114,5 +114,3 @@ if __name__ == '__main__':
 ```
 
 **Run the script again:** `python etl_category.py`
-
-This should now execute successfully and populate your `Dim_Category` table. Let me know the results\!
